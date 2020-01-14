@@ -1,4 +1,5 @@
 ﻿using aspShop.DataAccess.InMemory;
+using aspShop.Interfaces;
 using aspShop.Models;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace aspShop.WebUI.Controllers
 {
     public class ProductController : Controller
     {
-        ProductRepository context;
-        public ProductController()
+        IRepository<Product> context;
+        List<Category> categories;
+        public ProductController(IRepository<Product> context, IRepository<Category> categories)
         {
-           context = new ProductRepository();
+           this.context = context;
+           this.categories = categories.Collection().ToList();
         }
         
         // GET: Product
@@ -25,7 +28,9 @@ namespace aspShop.WebUI.Controllers
 
         public ActionResult CreateProduct()
         {
-            return View();
+            var viewModel = new ProductManager();
+            viewModel.Categories = categories;
+            return View(viewModel);
         }
 
         [HttpPost]

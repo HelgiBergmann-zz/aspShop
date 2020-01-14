@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IBaseProps.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Models\ProductManager.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
