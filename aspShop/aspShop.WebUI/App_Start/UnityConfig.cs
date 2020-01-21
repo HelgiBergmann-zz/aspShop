@@ -1,4 +1,5 @@
 using aspShop.DataAccess.InMemory;
+using aspShop.DataAccess.SQL;
 using aspShop.Interfaces;
 using aspShop.Models;
 using System;
@@ -44,8 +45,8 @@ namespace aspShop.WebUI
             // container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
-            container.RegisterType<IRepository<Product>, MemoryRepository<Product>>();
-            container.RegisterType<IRepository<Category>, MemoryRepository<Category>>();
+            container.RegisterType<IRepository<Product>, SQLRepository<Product>>();
+            container.RegisterType<IRepository<Category>, SQLRepository<Category>>();
         }
 
         private static void MemoryRepository<T>()

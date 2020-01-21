@@ -3,7 +3,7 @@ using aspShop.Interfaces;
 
 namespace aspShop.Interfaces
 {
-    public interface IRepository<T> where T : IBaseProps
+    public interface IRepository<T>
     {
         string Name { get; set; }
 
