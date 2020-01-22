@@ -7,10 +7,13 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateProduct")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -24,9 +27,6 @@
             @Html.DisplayNameFor(model => model.Category)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Id)
         </th>
         <th></th>
@@ -34,6 +34,9 @@
 
 @foreach (var item in Model) {
 <tr>
+    <td>
+        <img class="img-thumbnail" style="height:50px;" src="~/Content/ProductImages/@item.Image" alt="" />
+    </td>
     <td>
         @Html.DisplayFor(modelItem => item.Name)
     </td>
@@ -46,9 +49,7 @@
     <td>
         @Html.DisplayFor(modelItem => item.Category)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Image)
-    </td>
+
     <td>
         @Html.DisplayFor(modelItem => item.Id)
     </td>

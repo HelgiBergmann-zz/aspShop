@@ -3,6 +3,7 @@ using aspShop.Interfaces;
 using aspShop.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,11 +35,16 @@ namespace aspShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateProduct(Product product)
+        public ActionResult CreateProduct(Product product, HttpPostedFileBase image)
         {
             if(!ModelState.IsValid)
             {
                 return View(product);
+            }
+           if (image != null)
+            {
+                product.Image = product.Id + Path.GetExtension(image.FileName);
+                image.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);
             }
            context.Insert(product);
            context.Commit();
@@ -58,7 +64,7 @@ namespace aspShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product p, string id)
+        public ActionResult Edit(Product p, string id, HttpPostedFileBase image)
         {
             Product productToEdit = context.Find(id);
             
@@ -72,9 +78,13 @@ namespace aspShop.WebUI.Controllers
                     return View(p);
                 } else
                 {
+                    if (image != null)
+                    {
+                        productToEdit.Image = productToEdit.Id + Path.GetExtension(image.FileName);
+                        image.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image);
+                    }
                     productToEdit.Category = p.Category;
                     productToEdit.Description = p.Description;
-                    productToEdit.Image = p.Image;
                     productToEdit.Name = p.Name;
                     productToEdit.Price = p.Price;
                     context.Commit();
